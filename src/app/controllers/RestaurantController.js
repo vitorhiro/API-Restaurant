@@ -1,5 +1,4 @@
 import * as Yup from 'yup';
-import path from 'path';
 import Restaurant from '../models/Restaurant';
 
 class RestaurantController {
@@ -10,8 +9,6 @@ class RestaurantController {
       name: Yup.string().required(),
       phone: Yup.string(),
       cnpj: Yup.string().required(),
-      path: Yup.string(),
-      thumb_path: Yup.string(),
       zip_code: Yup.string().required(),
       street: Yup.string().required(),
       complement: Yup.string(),
@@ -25,8 +22,6 @@ class RestaurantController {
       return res.status(400).json({ error: 'Validation fails' });
     }
     const { cnpj } = req.body;
-    const photoPath = `restaurant_${path.parse(req.file.path).name}.jpeg`;
-    const thumbPath = `restaurant_${path.parse(req.file.path).name}_thumb.jpeg`;
 
     let restaurant = await Restaurant.findOne({
       where: { cnpj },
@@ -37,11 +32,7 @@ class RestaurantController {
       return res.status(409).json('Restaurant already exists.');
     }
 
-    restaurant = await Restaurant.create({
-      ...req.body,
-      path: photoPath,
-      thumb_path: thumbPath,
-    });
+    restaurant = await Restaurant.create(req.body);
 
     return res.json(restaurant);
   }
@@ -66,8 +57,6 @@ class RestaurantController {
       name: Yup.string(),
       phone: Yup.string(),
       cnpj: Yup.string(),
-      path: Yup.string(),
-      thumb_path: Yup.string(),
       zip_code: Yup.string(),
       street: Yup.string(),
       complement: Yup.string(),
@@ -82,19 +71,12 @@ class RestaurantController {
 
     const { id } = req.params;
 
-    const photoPath = `restaurant_${path.parse(req.file.path).name}.jpeg`;
-    const thumbPath = `restaurant_${path.parse(req.file.path).name}_thumb.jpeg`;
-
     let restaurant = await Restaurant.findOne({ where: { id } });
     if (!restaurant) {
       return res.status(404).json('Restaurant not found.');
     }
 
-    restaurant = await restaurant.update({
-      ...req.body,
-      path: photoPath,
-      thumb_path: thumbPath,
-    });
+    restaurant = await restaurant.update(req.body);
 
     return res.json(restaurant);
   }

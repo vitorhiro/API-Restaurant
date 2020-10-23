@@ -1,6 +1,7 @@
 import Sequelize from 'sequelize';
 
 import Restaurant from '../app/models/Restaurant';
+import RestaurantPhoto from '../app/models/RestaurantPhoto';
 import RestaurantWorkPeriod from '../app/models/RestaurantWorkPeriod';
 import Category from '../app/models/Category';
 import Product from '../app/models/Product';
@@ -10,7 +11,13 @@ import ProductTablePrice from '../app/models/ProductTablePrice';
 import databaseConfig from '../config/database';
 
 const models = [
-  Restaurant, RestaurantWorkPeriod, Category, Product, ProductPhoto, ProductTablePrice,
+  Restaurant,
+  RestaurantPhoto,
+  RestaurantWorkPeriod,
+  Category,
+  Product,
+  ProductPhoto,
+  ProductTablePrice,
 ];
 
 class DataBase {
@@ -21,8 +28,7 @@ class DataBase {
   init() {
     this.connection = new Sequelize(databaseConfig);
 
-    models
-      .map((model) => model.init(this.connection));
+    models.map((model) => model.init(this.connection));
   }
 }
 

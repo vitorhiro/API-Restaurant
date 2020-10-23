@@ -1,6 +1,6 @@
 module.exports = {
   up: (queryInterface, Sequelize) =>
-    queryInterface.createTable('restaurant_work_periods', {
+    queryInterface.createTable('restaurant_photos', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -12,20 +12,15 @@ module.exports = {
         allowNull: false,
         references: { model: 'restaurants', key: 'id' },
       },
-      week_day: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-      },
-      start_hour: {
+      path: {
         type: Sequelize.STRING,
         allowNull: false,
+        unique: true,
       },
-      end_hour: {
+      thumb_path: {
         type: Sequelize.STRING,
         allowNull: false,
-      },
-      period: {
-        type: Sequelize.INTEGER,
+        unique: true,
       },
       created_at: {
         type: Sequelize.DATE,
@@ -40,5 +35,5 @@ module.exports = {
       },
     }),
 
-  down: (queryInterface) => queryInterface.dropTable('restaurant_work_periods'),
+  down: (queryInterface) => queryInterface.dropTable('restaurant_photos'),
 };

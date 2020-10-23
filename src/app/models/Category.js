@@ -1,6 +1,6 @@
 import Sequelize, { Model } from 'sequelize';
 
-class RestaurantWorkPeriod extends Model {
+class Category extends Model {
   static init(sequelize) {
     super.init(
       {
@@ -14,11 +14,11 @@ class RestaurantWorkPeriod extends Model {
         createdAt: 'created_at',
         updatedAt: 'updated_at',
         deletedAt: 'deleted_at',
-      },
+      }
     );
 
     return this;
   }
 }
 
-export default RestaurantWorkPeriod;
+export default Category;

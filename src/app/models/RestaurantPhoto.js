@@ -1,10 +1,10 @@
 import Sequelize, { Model } from 'sequelize';
 
-class ProductPhoto extends Model {
+class RestaurantPhoto extends Model {
   static init(sequelize) {
     super.init(
       {
-        product_id: Sequelize.INTEGER,
+        restaurant_id: Sequelize.INTEGER,
         path: Sequelize.STRING,
         thumb_path: Sequelize.STRING,
         url: {
@@ -38,4 +38,4 @@ class ProductPhoto extends Model {
   }
 }
 
-export default ProductPhoto;
+export default RestaurantPhoto;

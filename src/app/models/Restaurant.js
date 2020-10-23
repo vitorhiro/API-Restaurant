@@ -12,8 +12,6 @@ class Restaurant extends Model {
         name: Sequelize.STRING,
         phone: Sequelize.STRING,
         cnpj: Sequelize.STRING,
-        path: Sequelize.STRING,
-        thumb_path: Sequelize.STRING,
         zip_code: Sequelize.STRING,
         street: Sequelize.STRING,
         complement: Sequelize.STRING,

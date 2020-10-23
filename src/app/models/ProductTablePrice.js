@@ -1,6 +1,6 @@
 import Sequelize, { Model } from 'sequelize';
 
-class RestaurantWorkPeriod extends Model {
+class ProductTablePrice extends Model {
   static init(sequelize) {
     super.init(
       {
@@ -9,7 +9,8 @@ class RestaurantWorkPeriod extends Model {
         regular_price: Sequelize.DECIMAL,
         promotional_price: Sequelize.DECIMAL,
         promotional_price_description: Sequelize.STRING,
-        promotional_price_at: Sequelize.DATE,
+        promotional_price_start_at: Sequelize.DATE,
+        promotional_price_end_at: Sequelize.DATE,
       },
       {
         sequelize,
@@ -18,11 +19,11 @@ class RestaurantWorkPeriod extends Model {
         createdAt: 'created_at',
         updatedAt: 'updated_at',
         deletedAt: 'deleted_at',
-      },
+      }
     );
 
     return this;
   }
 }
 
-export default RestaurantWorkPeriod;
+export default ProductTablePrice;
