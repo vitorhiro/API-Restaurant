@@ -8,7 +8,7 @@ class RestaurantWorkPeriodController {
       week_day: Yup.number().integer().required(),
       start_hour: Yup.string().required(),
       end_hour: Yup.string().required(),
-      period: Yup.number().integer(),
+      period: Yup.number().integer().required(),
     });
 
     if (!(await schema.isValid(req.body))) {

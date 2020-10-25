@@ -9,7 +9,9 @@
   "scripts": {
     "dev": "nodemon src/server.js",
     "build": "sucrase ./src -d ./dist --transforms imports && npm run copy:templates",
-    "start": "node dist/server.js"
+    "pretest": "NODE_ENV=test sequelize db:migrate",
+    "test": "NODE_ENV=test jest || :",
+    "posttest": "NODE_ENV=test sequelize db:migrate:undo:all"
   },
   "repository": {
     "type": "git",
@@ -34,13 +36,18 @@
     "yup": "^0.29.3"
   },
   "devDependencies": {
+    "@sucrase/jest-plugin": "^2.0.0",
+    "@types/jest": "^26.0.15",
     "eslint": "^7.11.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-config-prettier": "^6.13.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-prettier": "^3.1.4",
+    "jest": "^26.6.1",
     "nodemon": "^2.0.6",
     "sequelize-cli": "^6.2.0",
-    "sucrase": "^3.16.0"
+    "sqlite3": "^5.0.0",
+    "sucrase": "^3.16.0",
+    "supertest": "^5.0.0"
   }
 }

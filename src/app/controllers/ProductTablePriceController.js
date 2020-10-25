@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import { differenceInMinutes, parseISO } from 'date-fns';
 import ProductTablePrice from '../models/ProductTablePrice';
 
 class ProductTablePriceController {
@@ -17,6 +18,22 @@ class ProductTablePriceController {
       return res.status(400).json({ error: 'Validation fails' });
     }
 
+    if (
+      req.body.promotional_price_end_at &&
+      req.body.promotional_price_start_at
+    ) {
+      const difference = differenceInMinutes(
+        parseISO(req.body.promotional_price_end_at),
+        parseISO(req.body.promotional_price_start_at)
+      );
+
+      if (difference < 15) {
+        return res
+          .status(400)
+          .json({ error: 'Interval must be bigger than 15 minutes' });
+      }
+    }
+
     const productTablePrice = await ProductTablePrice.create(req.body);
 
     return res.json(productTablePrice);
@@ -31,6 +48,7 @@ class ProductTablePriceController {
     if (!productTablePrice) {
       return res.status(404).json('Product table price not found.');
     }
+
     return res.json(productTablePrice);
   }
 

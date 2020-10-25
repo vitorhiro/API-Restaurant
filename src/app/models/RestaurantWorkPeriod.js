@@ -8,6 +8,7 @@ class RestaurantWorkPeriod extends Model {
         week_day: Sequelize.INTEGER,
         start_hour: Sequelize.STRING,
         end_hour: Sequelize.STRING,
+        period: Sequelize.INTEGER,
       },
       {
         sequelize,

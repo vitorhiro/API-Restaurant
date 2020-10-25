@@ -43,7 +43,7 @@ class CategoryController {
   async update(req, res) {
     const schema = Yup.object().shape({
       restaurant_id: Yup.number().integer(),
-      name: Yup.string().integer(),
+      name: Yup.string(),
     });
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({ error: 'Validation fails' });
